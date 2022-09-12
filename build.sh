@@ -19,9 +19,7 @@ mkdir ../"$FOLDER"
 #							     #
 #							     #
 ##############################################################
-cd usr/share/drauger-installer
-$COMPILER $ARGS -Wall -o "log-out" "log-out.cxx" && echo "log-out compiled successfully"
-cd ../../..
+# nothing to compile
 ##############################################################
 #							     #
 #							     #
@@ -52,52 +50,17 @@ fi
 if [ -d libx32 ]; then
 	cp -R libx32 ../"$FOLDER"/libx32
 fi
-if [ -d dev ]; then
-	cp -R dev ../"$FOLDER"/dev
-fi
-if [ -d home ]; then
-	cp -R home ../"$FOLDER"/home
-fi
-if [ -d proc ]; then
-	cp -R proc ../"$FOLDER"/proc
-fi
-if [ -d root ]; then
-	cp -R root ../"$FOLDER"/root
-fi
-if [ -d run ]; then
-	cp -R run ../"$FOLDER"/run
-fi
 if [ -d sbin ]; then
 	cp -R sbin ../"$FOLDER"/sbin
-fi
-if [ -d sys ]; then
-	cp -R sys ../"$FOLDER"/sys
-fi
-if [ -d tmp ]; then
-	cp -R tmp ../"$FOLDER"/tmp
-fi
-if [ -d var ]; then
-	cp -R var ../"$FOLDER"/var
 fi
 if [ -d opt ]; then
 	cp -R opt ../"$FOLDER"/opt
 fi
-if [ -d srv ]; then
-	cp -R srv ../"$FOLDER"/srv
-fi
+
 cp -R DEBIAN ../"$FOLDER"/DEBIAN
 cd ..
 #DELETE STUFF HERE
-rm "$FOLDER"/usr/share/drauger-installer/log-out.cxx
-rm drauger-installer/usr/share/drauger-installer/log-out
+# nothing to delete
 #build the shit
-#build config
-if [ "$ARCH" == "amd64" ]; then
-	echo "amd64, x86_64, x86, i386, i486, x64, all" > "$FOLDER"/etc/drauger-installer/arch.conf
-elif [ "$ARCH" == "arm64" ]; then
-	echo "arm64, arm, aarch64, aarch, armhf, all" > "$FOLDER"/etc/drauger-installer/arch.conf
-else
-	echo "all" > "$FOLDER"/etc/drauger-installer/arch.conf
-fi
 dpkg-deb --build "$FOLDER"
 rm -rf "$FOLDER"
