@@ -1,9 +1,11 @@
-Package: Drauger-BTRFS-scrub
+Package: butter-scrub
 Version: 0.0.1
 Maintainer: Richard Romick <contact@draugeros.org>
 Section: admin
-Homepage: TBD
-Architecture: amd64
+Architecture: all
 Priority: optional
-Depends: apt (>=1.6.6), bash (>=4.4.18-2ubuntu1)
-Description: Sets up monthly chron job for the DraugerOS filesystem created by the auto-paritioner
+Depends: btrfs, bash (>=5.0)
+Description: Monthly cron job to scrub a btrfs filesystem
+ This package sets up a monthly cron job to scrub a btrfs file system. This helps prevent bit-rot and maintain data integrity.
+ .
+ Because it is a cron job, butter-scrub does not depend on any specific init system and should run on almost any distro.
