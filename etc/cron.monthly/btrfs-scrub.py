@@ -5,7 +5,7 @@ import subprocess
 
 # Get a list of disks and their filetype
 devices = json.loads(subprocess.check_output(["lsblk", "-n", "-i", "--json",
-                                                           "-o", "NAME,FSTYPE"]).decode())
+                                                           "-o", "NAME,FSTYPE,MOUNTPOINT"]).decode())
 
 devices = devices["blockdevices"] # select the json area "blockdevices"
 
@@ -23,7 +23,12 @@ for device in dev_list:  # we will iterate through the dev list and add devices 
                 scrub_list.append("/dev" + child['name'])
     else: # this is the case wher ethe device does not have children
         if device['fstype'] == 'btrfs':
-            scrub_list.append("/dev" + child['name'])
+            # we are almost ready to add this btrfs partition to the list of partions to be scrubbed
+            # however, we want to make sure it is not mounted in /mnt or /mount, which would mean
+            # the device is probably removable and we don't want to scrub it in case the user
+            # removes the device
+            if not (device['mountpoint'] == '/mnt' or device['mountpoint'] == '/media'):
+                scrub_list.append("/dev" + child['name'])
 
 final_command = ""
 
