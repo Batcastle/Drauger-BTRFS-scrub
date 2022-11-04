@@ -13,7 +13,10 @@ dev_list = tuple(devices) # change the devices list into a tuple
 scrub_list = [] # this is the list of devices we want to run btrfs_scrub on
 
 for device in dev_list:  # we will iterate through the dev list and add devices to the scrub_list
-    if device == []:  # if the device is empty, we skip
+    if device['mountpoint'] == '/mnt' or device['mountpoint'] == '/media': 
+        # if the device is in these locations, it is probably removable and we don't want to include it
+        continue
+    elif device == []:  # if the device is empty, we skip
         continue
     elif 'children' in device:
         for child in device['children']:
@@ -21,14 +24,9 @@ for device in dev_list:  # we will iterate through the dev list and add devices 
                 continue
             elif not child['fstype'] == 'btrfs':  # if it is a btrfs partition, add it
                 scrub_list.append("/dev" + child['name'])
-    else: # this is the case wher ethe device does not have children
+    else: # this is the case wher the device does not have children
         if device['fstype'] == 'btrfs':
-            # we are almost ready to add this btrfs partition to the list of partions to be scrubbed
-            # however, we want to make sure it is not mounted in /mnt or /mount, which would mean
-            # the device is probably removable and we don't want to scrub it in case the user
-            # removes the device
-            if not (device['mountpoint'] == '/mnt' or device['mountpoint'] == '/media'):
-                scrub_list.append("/dev" + child['name'])
+            scrub_list.append("/dev" + child['name'])
 
 final_command = ""
 
