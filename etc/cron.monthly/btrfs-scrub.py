@@ -28,9 +28,7 @@ for device in dev_list:  # we will iterate through the dev list and add devices 
         if device['fstype'] == 'btrfs':
             scrub_list.append("/dev/" + child['name'])
 
-final_command = ""
-
-for device_name in scrub_list:
-    subprocess.check_output("btrfs scrub start -B" + final_command)
+for partition_name in scrub_list:
+    subprocess.check_output("btrfs scrub start -B" + partition_name)
 
 
