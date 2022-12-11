@@ -23,7 +23,7 @@ for device in dev_list:  # we will iterate through the dev list and add devices 
             if "fstype" not in child.keys():  # if it doesn't have a label, skip
                 continue
             elif child['fstype'] == 'btrfs':  # if it is a btrfs partition, add it
-                scrub_list.append("/dev" + child['name'])
+                scrub_list.append("/dev/" + child['name'])
     else: # this is the case wher the device does not have children
         if device['fstype'] == 'btrfs':
             scrub_list.append("/dev" + child['name'])
