@@ -33,4 +33,4 @@ final_command = ""
 for device_name in scrub_list:
     final_command += device_name
 
-subprocess.check_output("btrfs_scrub start " + final_command)
+subprocess.check_output("btrfs scrub start " + final_command)
