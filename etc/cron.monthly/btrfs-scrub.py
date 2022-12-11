@@ -29,6 +29,6 @@ for device in dev_list:  # we will iterate through the dev list and add devices 
             scrub_list.append("/dev/" + child['name'])
 
 for partition_name in scrub_list:
-    subprocess.check_output("btrfs scrub start -B" + partition_name)
+    subprocess.run(["btrfs", "scrub", "start", "-B", partition_name])
 
 
