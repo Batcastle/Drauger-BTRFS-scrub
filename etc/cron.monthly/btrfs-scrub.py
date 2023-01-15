@@ -47,10 +47,12 @@ for device in dev_list:
         for child in device['children']:
             if "fstype" not in child.keys():  # if it doesn't have a label, skip
                 continue
-            elif child['fstype'] == 'btrfs':  # if it is a btrfs partition, add it
+            elif child['fstype'] == 'btrfs' and child['mountpoint'] != None:
+                # if the child is btrfs and the mountpoint isn't null, add it
                 scrub_list.append("/dev/" + child['name'])
     else: # this is the case where the device does not have children
-        if device['fstype'] == 'btrfs':
+        if device['fstype'] == 'btrfs' and device['mountpoint'] != None:
+            # if the device is btrfs and the mountpoint isn't null, add it
             scrub_list.append("/dev/" + device['name'])
 
 # *** log the devices we decided to run butter_scrub on ***
