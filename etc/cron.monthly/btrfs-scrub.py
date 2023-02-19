@@ -70,4 +70,7 @@ if logging_enabled:
 for partition_name in scrub_list:
     results = subprocess.run(["btrfs", "scrub", "start", "-B", partition_name])
 
+    #command option -B: do not background and print scrub statistics when finished
+
+
 
