@@ -1,6 +1,6 @@
 #!/bin/bash
 # correct the build directory's permissions so the pacakage will build
-chmod 755 ./
+chmod -R 755 ./
 VERSION=$(cat DEBIAN/control | grep 'Version: ' | sed 's/Version: //g')
 PAK=$(cat DEBIAN/control | grep 'Package: ' | sed 's/Package: //g')
 ARCH=$(cat DEBIAN/control | grep 'Architecture: '| sed 's/Architecture: //g')
