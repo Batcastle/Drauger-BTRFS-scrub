@@ -66,5 +66,3 @@ cd ..
 #build the package
 dpkg-deb --build "$FOLDER"
 rm -rf "$FOLDER"
-# update man database
-mandb
