@@ -7,11 +7,11 @@ import time
 logging_enabled = True
 
 # *** create log file if it doesn't exist ***
-subprocess.run(["touch", "/var/log/btrfs-scrub.log"])
+subprocess.run(["touch", "/var/log/butter-scrub.log"])
 
 # *** open file and log the script has started ***
 try:
-    with open("/var/log/btrfs-scrub.log", "w+") as file:
+    with open("/var/log/butter-scrub.log", "w+") as file:
         file.write("BTRFS Scrub started" + time.asctime(time.localtime(time.time())))
 except OSError: 
     # if for some reason we still can't write to the log file, disable logging
@@ -27,7 +27,7 @@ devices = devices["blockdevices"] # cut out everything except for "blockdevices"
 # *** log discovered partitions ***
 if logging_enabled:
     try:
-        with open("/var/log/btrfs-scrub.log", "w") as file:
+        with open("/var/log/butter-scrub.log", "w") as file:
             file.write("Discovered devices:\n")
             file.write(json.dumps(devices))
     except OSError:
@@ -58,7 +58,7 @@ for device in dev_list:
 # *** log the devices we decided to run butter_scrub on ***
 if logging_enabled:
     try:
-        with open("/var/log/btrfs-scrub.log", "a") as file:
+        with open("/var/log/butter-scrub.log", "a") as file:
             file.write("\nSelected scrub devices: ")
             for item in scrub_list:
                 file.write(item)
