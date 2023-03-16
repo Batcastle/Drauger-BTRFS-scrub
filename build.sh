@@ -61,6 +61,8 @@ cp -R DEBIAN ../"$FOLDER"/DEBIAN
 cd ..
 #DELETE STUFF HERE
 # nothing to delete
-#build the shit
+#build the package
 dpkg-deb --build "$FOLDER"
 rm -rf "$FOLDER"
+# update man database
+mandb
