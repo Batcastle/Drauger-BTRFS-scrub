@@ -1,10 +1,10 @@
 Package: butter-scrub
-Version: 0.0.1
+Version: 0.0.2
 Maintainer: Richard Romick <contact@draugeros.org>
 Section: admin
 Architecture: all
 Priority: optional
-Depends: btrfs, bash (>=5.0)
+Depends: btrfs-progs, bash (>=5.0)
 Description: Monthly cron job to scrub a btrfs filesystem
  This package sets up a monthly cron job to scrub a btrfs file system. This helps prevent bit-rot and maintain data integrity.
  .

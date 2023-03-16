@@ -1,4 +1,6 @@
 #!/bin/bash
+# correct the build directory's permissions so the pacakage will build
+chmod -R 755 ./
 VERSION=$(cat DEBIAN/control | grep 'Version: ' | sed 's/Version: //g')
 PAK=$(cat DEBIAN/control | grep 'Package: ' | sed 's/Package: //g')
 ARCH=$(cat DEBIAN/control | grep 'Architecture: '| sed 's/Architecture: //g')
@@ -61,6 +63,6 @@ cp -R DEBIAN ../"$FOLDER"/DEBIAN
 cd ..
 #DELETE STUFF HERE
 # nothing to delete
-#build the shit
+#build the package
 dpkg-deb --build "$FOLDER"
 rm -rf "$FOLDER"

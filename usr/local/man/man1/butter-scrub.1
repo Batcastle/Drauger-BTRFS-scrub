@@ -1,0 +1,32 @@
+.Dd 2/18/23               \" DATE
+.TH butter-scrub 1      \" Program name and manual section number
+.Os Linux
+.Sh NAME                 \" Section Header - required - don't modify
+.Nm butter-scrub
+.\" The following lines are read in generating the apropos(man -k) database. Use only key
+.\" words here as the database is built based on the words here and in the .ND line.
+.\" Use .Nm macro to designate other names for the documented program.
+.Nd scans btrfs partitions for errors
+.Sh SYNOPSIS             \" Section Header - required - don't modify
+A cron job to routinely scan btrfs partitions
+.Sh DESCRIPTION          \" Section Header - required - don't modify
+Upon installation, package installs a script named btrfs-scrub.py into cron monthly.  This script will scan for btrfs partitions and add them to a queue to be scanned for errors with the btrfs scrub command.  Partitions in /mnt or /media will not be scanned as partitions in these locations are likely to be part of removable drives.  
+
+When the btrfs scrub command is run, it is forced to scan each partition in sequence.  The btrfs scrub command will only execute when the system is idle.
+
+Results from the script are written to /var/log/butter-scrub.log.  
+Per the btrfs scrub man page, "The scrubbing status is recorded in /var/lib/btrfs/ in textual files named scrub.status.UUID"
+
+.\" .Sh DIAGNOSTICS       \" May not be needed
+.\" .Bl -diag
+.\" .It Diagnostic Tag
+.\" Diagnostic informtion here.
+.\" .It Diagnostic Tag
+.\" Diagnostic informtion here.
+.\" .El
+.Sh SEE ALSO
+.\" List links in ascending order by section, alphabetically within a section.
+.\" Please do not reference files that do not exist without filing a bug report
+.Xr btrfs 8 
+.\" .Sh BUGS              \" Document known, unremedied bugs
+.\" .Sh HISTORY           \" Document history if command behaves in a unique manner
